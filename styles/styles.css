@@ -1,0 +1,28 @@
+:root {
+    --color-fuentes: #003049;
+    /* Azul primario */
+    --color-rojo: #d62828;
+    /* Gris secundario */
+    --color-naranja: #f77f00;
+    --color-intermedio: #fcbf49;
+    /* Amarillo destacado */
+    --color-suave: #eae2b7;
+}
+
+#logo-mini {
+    border-radius: 50%;
+    /* Hago el logo un círculo */
+}
+
+/*TODO: Estilos de Users*/
+
+/*Login*/
+.login-container,
+.crud-container {
+    display: none; /* Oculto el contenedor del crud de usuarios y del login*/
+}
+
+.show {
+    display: block !important; /* Muestro el contenedor del crud de usuarios */
+}
+/*Crud de usuarios*/
