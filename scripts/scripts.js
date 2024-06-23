@@ -17,25 +17,28 @@ function login(event) { //funcion del login, paso como parametro event para la f
 
 const baseURL = 'https://66677fa2a2f8516ff7a7a5f0.mockapi.io' //URL de la API
 
+var users = []; //Array de usuarios de la API
+
 //? Obtener los usuarios de la API
 axios.get(`${baseURL}/users`)//Obtengo los usuarios de la API
-.then(response => {
-    renderUsers(response.data)
+    .then(response => {
+        renderUsers(response.data)
+        users = response.data; //Guardo los usuarios agarrados por la API en el array
     }) //Si la respuesta es correcta, muestro los usuarios en la tabla
-.catch(error => {
-    Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: "Algo salió mal!",
-    footer: "No estamos recibiendo correctamente la información de la API, por favor intenta más tarde"
-});
-console.log(error);
-}); //Si hay un error, lo muestro con esta alerta de swal.fire
+    .catch(error => {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salió mal!",
+            footer: "No estamos recibiendo correctamente la información de la API, por favor intenta más tarde"
+        });
+        console.log(error);
+    }); //Si hay un error, lo muestro con esta alerta de swal.fire
 
 //? Rellenar la tabla de usuarios de la API, y los agregados por el usuario
 
-const tableHTML = document.getElementById('table-container');
-const tableBodyHTML = document.getElementById('table-body');
+const tableHTML = document.getElementById('table-container'); //Selecciono el contenedor de la tabla
+const tableBodyHTML = document.getElementById('table-body'); //Selecciono el cuerpo de la tabla
 
 function renderUsers(arrayUsers) {
     tableBodyHTML.innerHTML = ''; //Limpio la tabla
@@ -62,12 +65,31 @@ function renderUsers(arrayUsers) {
     //updateEditButtons();
 }
 
+//? Eliminar un usuario
+
+function deleteUser(idUser) {
+
+    const indice = users.findIndex((user) => user.id == idUser);
+     
+    if (indice === -1) {//Si no lo encuentra, muestro un error
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontró el usuario a eliminar'
+        })
+        return;
+    }
+
+    users.splice(indice, 1);//Elimino el usuario del array
+    renderUsers(users);//Vuelvo a mostrar la tabla
+}
+
 //? Editar un usuario
 
-function updateEditButtons(){
+function updateEditButtons() {
     userButtonsEdit = document.querySelectorAll('button[data-edit]'); //Selecciono todos los botones con el atributo data-edit
     userButtonsEdit.forEach(button => { //Por cada botón, le agrego un evento click
-        button.addEventListener('click', function(event){
+        button.addEventListener('click', function (event) {
             event.preventDefault(); //Que no se recargue la página
             const id = event.currentTarget.dataset.edit; //Obtengo el id del usuario que fue clickeado
             completeUser(id); //Voy a la función de completar usuario con el id clickeado
@@ -75,8 +97,56 @@ function updateEditButtons(){
     });
 }
 
-//? Agregar un usuario
+//? Agregar un usuario cuando toco submit
 
-function completeUser(){
+let isEditing; //Variable para saber si estoy editando o agregando un usuario
+let userToEdit; //Variable para saber qué usuario estoy editando
+const userFormHTML = document.querySelector('#user-form'); //Selecciono el formulario de usuario
+const btnSubmitHTML = userFormHTML.querySelector('button[type="submit"]'); //Selecciono el botón de submit del formulario
+const formContainerHTML = document.querySelector('#form-container'); //Selecciono el contenedor del formulario para la estetica
+
+
+userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit al formulario
     
+    event.preventDefault(); //Evito que se recargue la página
+    const element = event.target.elements; //Selecciono los elementos del formulario
+
+    const newUser = { //Creo un objeto con los valores del formulario
+        id: users.length + 1,
+        fullname: element.fullname.value,
+        email: element.email.value,
+        location: element.location.value,
+        bornDate: element.bornDate.value,
+        image: element.image.value
+    };
+});
+
+//? Completar el formulario con los datos del usuario a editar
+function completeUser() {
+    isEditing = idUser; //Estoy editando un usuario
+
+    const user = users.find((usr) => usr.id === idUser); //Busco el usuario a editar
+
+    if (!user) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontró el usuario a editar'
+        });
+        return;
+    }
+    //?Reemplazar los valores del formulario con los del usuario a editar
+    const element = userFormHTML.elements; //Selecciono los elementos del formulario
+    element.fullname.value = user.fullname; //Reemplazo el valor
+    element.email.value = user.email; //Reemplazo el valor
+    element.location.value = user.location; //Reemplazo el valor
+    element.bornDate.value = user.bornDate; //Reemplazo el valor
+    element.image.value = user.image; //Reemplazo el valor
+
+    //? Cambiar el texto del botón de submit
+
+    formContainerHTML.classList.add('form-edit'); //Muestro el formulario
+    btnSubmitHTML.classList.remove('btn-primary'); //Quito la clase btn-primary
+    btnSubmitHTML.classList.add('btn-success'); //Agrego la clase btn-success
+    btnSubmitHTML.innerText = 'Editar empleado'; //Cambio el texto del botón
 }
