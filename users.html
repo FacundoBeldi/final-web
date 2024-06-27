@@ -53,7 +53,7 @@
     <div class="crud-container" id="crud-container"> <!--no tien el show, por ende va a tener el display: none-->
         <div class="contenedor">
             <div class="formulario">
-                <h1>Usuarios de El Galpón</h1>
+                <h1>Empleados de El Galpón</h1>
                 <form class="user-form" id="user-form">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre Completo</label>
@@ -70,6 +70,10 @@
                         <label for="exampleFormControlInput1" class="form-label">Fecha Nacimiento</label>
                         <input type="date" name="bornDate" class="form-control" id="exampleFormControlInput2"
                             placeholder="Juan Gonzalez" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="active" class="form-check-input" id="exampleCheck1" required>
+                        <label class="form-check-label" for="exampleCheck1">¿Sigue trabajando?</label>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Localidad</label>
@@ -123,6 +127,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Localidad</th>
                                 <th scope="col">Edad</th>
+                                <th scope="col">Empleado Activo</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>

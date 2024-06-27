@@ -26,3 +26,57 @@
     display: block !important; /* Muestro el contenedor del crud de usuarios */
 }
 /*Crud de usuarios*/
+.contenedor {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 3rem;
+    padding-top: 2rem;
+}
+
+.contenedor h1 {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.formulario {
+    margin: 5px;
+    width: 30%;
+    padding: 1rem;
+    border-radius: 5%;
+}
+
+.tabla {
+    margin: 5px;
+    width: 70%;
+}
+
+.user-image img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.d-flex {
+    margin: 2rem;
+}
+
+.form-edit{
+    background-color: var(--color-intermedio);
+}
+
+@media screen and (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .formulario {
+        width: 100%;
+    }
+}
+  
