@@ -52,7 +52,7 @@ function renderUsers(arrayUsers) {
                 <td class="user-mail"> ${user.email}</td>
                 <td class="user-city"> ${user.location}</td>
                 <td class="user-age"> ${user.bornDate}</td>
-                <td class="user-active">${user.active}></td>
+                <td class="user-active">${user.active}</td>
                 <td class="cont-btn">
                     <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">
                         <i class="fa-solid fa-trash"></i>
@@ -116,11 +116,11 @@ function updateEditButtons() {
 
 //? Agregar un usuario cuando toco submit
 
-let isEditing; //Variable para saber si estoy editando o agregando un usuario
-let userToEdit; //Variable para saber qué usuario estoy editando
+let isEditing = false; //Variable para saber si estoy editando o agregando un usuario
+let userToEdit = null; //Variable para saber qué usuario estoy editando
 const userFormHTML = document.querySelector('#user-form'); //Selecciono el formulario de usuario
 const btnSubmitHTML = userFormHTML.querySelector('button[type="submit"]'); //Selecciono el botón de submit del formulario
-const formContainerHTML = document.querySelector('#form-container'); //Selecciono el contenedor del formulario para la estetica
+const formContainerHTML = document.querySelector('.formulario'); //Selecciono el contenedor del formulario para la estetica
 
 userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit al formulario
 
@@ -128,14 +128,16 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
     const element = event.target.elements; //Selecciono los elementos del formulario
 
     const newUser = { //Creo un objeto con los valores del formulario
-        id: users.length + 1,
+        //el id lo asigna la API
         fullname: element.fullname.value,
         email: element.email.value,
         location: element.location.value,
         bornDate: element.bornDate.value,
         active: element.active.value,
         image: element.image.value
-    }; if (isEditing) {
+    }
+
+    if (isEditing) {
         axios.put(`${baseURL}/users/${userToEdit}`, newUser)
             .then(response => {
                 const index = users.findIndex(user => user.id === userToEdit);
@@ -180,8 +182,9 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
 });
 
 //? Completar el formulario con los datos del usuario a editar
+
 function completeUser(idUser) {
-    isEditing = idUser; //Estoy editando un usuario
+    isEditing = true; //Estoy editando un usuario
     userToEdit = idUser;
     const user = users.find((usr) => usr.id === idUser); //Busco el usuario a editar
 
@@ -205,16 +208,16 @@ function completeUser(idUser) {
     //? Cambiar el texto del botón de submit
 
     formContainerHTML.classList.add('form-edit'); //Muestro el formulario
-    btnSubmitHTML.classList.remove('btn-primary'); //Quito la clase btn-primary
-    btnSubmitHTML.classList.add('btn-success'); //Agrego la clase btn-success
-    btnSubmitHTML.innerText = 'Editar empleado'; //Cambio el texto del botón
+    btnSubmitHTML.classList.remove('btn-primary');
+    btnSubmitHTML.classList.add('btn-success');
+    btnSubmitHTML.innerText = 'Editar usuario';
+}
 
-    function resetForm() {
-        userFormHTML.reset();
-        isEditing = false;
-        userToEdit = null;
-        btnSubmitHTML.classList.remove('btn-success');
-        btnSubmitHTML.classList.add('btn-primary');
-        btnSubmitHTML.innerText = 'Agregar';
-    }
+function resetForm() {
+    userFormHTML.reset();
+    isEditing = false;
+    userToEdit = null;
+    btnSubmitHTML.classList.remove('btn-success');
+    btnSubmitHTML.classList.add('btn-primary');
+    btnSubmitHTML.innerText = 'Agregar';
 }
