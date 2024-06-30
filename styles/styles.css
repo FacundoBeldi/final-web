@@ -120,6 +120,9 @@
     .boton-flecha {
         bottom: 10px; 
     }
+    #primero{
+        display: none;
+    }
 }
 
 
