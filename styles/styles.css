@@ -1,12 +1,27 @@
+/*TODO: Estilos Generales*/
+
 :root {
     --color-fuentes: #003049;
-    /* Azul primario */
-    --color-rojo: #d62828;
-    /* Gris secundario */
+    --color-rojo: rgb(201, 67, 67);
+    --color-naranja-fuerte: #6a040f;
     --color-naranja: #f77f00;
     --color-intermedio: #fcbf49;
-    /* Amarillo destacado */
     --color-suave: #eae2b7;
+    --color-suave-oscuro: #d4c485;
+}
+
+/*TODO: Estilos de NavBar*/
+
+/*Estilos de El Galpon navbar*/
+.navbar-brand {
+    font-family: "Alfa Slab One", serif;
+    text-transform: uppercase;
+    color: var(--color-rojo) !important;
+}
+
+/*Menu hamburguesa*/
+.navbar-toggler {
+    color: var(--color-rojo) !important;
 }
 
 #logo-mini {
@@ -14,17 +29,252 @@
     /* Hago el logo un círculo */
 }
 
-/*TODO: Estilos de Users*/
+/*TODO: Estilos de seccion Banner del Index*/
+
+.banner {
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    color: var(--color-fuentes);
+    overflow: hidden; /* Evita que el botón se desborde en dispositivos pequeños */
+}
+
+.capsula_foto {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.capsula_foto::before {
+    content: ""; /* Necesario para que funcione el pseudo-elemento */
+    position: absolute; /* Posición absoluta en relación al contenedor */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 100%; /* Ocupa toda la altura del contenedor */
+    background-image: url(/img/fondo.png); /* Imagen de fondo */
+    background-size: cover; /* Cubre todo el contenedor */
+    background-position: center; /* Centra la imagen */
+    opacity: 0.5; /* Opacidad del 50% */
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+}
+
+.texto {
+    text-align: center;
+}
+
+#primero, #segundo {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.banner-galpon {
+    font-weight: bold;
+    color: var(--color-rojo);
+    font-family: "Alfa Slab One", serif;
+    text-transform: uppercase;
+}
+
+.boton-flecha {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    position: absolute;
+    bottom: 100px; 
+    width: 100%;
+}
+
+.boton-flecha .btn {
+    font-size: 1.5em;
+}
+
+.flecha {
+    font-size: 1.5em;
+    color: var(--color-rojo);
+}
+
+.flecha i {
+    font-size: 2em;
+}
+
+
+@media screen and (max-width: 1020px) {
+    .banner {
+        height: 500px;
+    }
+    .boton-flecha {
+        bottom: 20px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .banner {
+        height: 300px;
+    }
+    .boton-flecha {
+        bottom: 10px; 
+    }
+}
+
+
+/*TODO: Estilos de seccion Info del Index*/
+
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: var(--color-suave);
+}
+
+.info_partes {
+    padding: 10px;
+    text-align: center;
+    height: 250px;
+    padding-top: 50px;
+}
+
+.info_partes:hover {
+    background-color: var(--color-intermedio);
+    transition: 0.5s;
+}
+
+/*TODO: Estilos de seccion Opiniones del Index*/
+
+.opiniones {
+    background: var(--color-suave);
+    color: var(--color-fuentes);
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.opiniones h3 {
+    font-weight: 500;
+}
+
+.opiniones .contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.opiniones-fotos {
+    margin: 30px;
+}
+
+.opiniones-fotos img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 7px solid var(--color-rojo);
+}
+
+/*TODO: Estilos del Footer*/
+
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-suave-oscuro);
+    height: auto;
+    width: 100%;
+    padding-top: 40px;
+    color: var(--color-fuentes);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 3rem;
+    font-family: "Alfa Slab One", serif;
+    text-transform: uppercase;
+    color: var(--color-rojo);
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: var(--color-fuentes);
+}
+
+.socials a i {
+    font-size: 1.1rem;
+    transition: color .4s ease;
+}
+
+.socials a:hover i {
+    color: var(--color-rojo);
+}
+
+.footer-bottom {
+    background: var(--color-naranja-fuerte);
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+    color: var(--color-naranja)
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    color: var(--color-rojo);
+    font-weight: 200;
+}
+
+/*TODO: Estilos de Login*/
 
 /*Login*/
 .login-container,
 .crud-container {
-    display: none; /* Oculto el contenedor del crud de usuarios y del login*/
+    display: none;
+    /* Oculto el contenedor del crud de usuarios y del login*/
 }
 
 .show {
-    display: block !important; /* Muestro el contenedor del crud de usuarios */
+    display: block !important;
+    /* Muestro el contenedor del crud de usuarios */
 }
+
+/*TODO: Estilos de Crud de usuarios*/
+
 /*Crud de usuarios*/
 .contenedor {
     display: flex;
@@ -65,7 +315,7 @@
     margin: 2rem;
 }
 
-.form-edit{
+.form-edit {
     background-color: var(--color-intermedio);
 }
 
@@ -79,4 +329,3 @@
         width: 100%;
     }
 }
-  

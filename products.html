@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Galpón Muebles | Productos</title>
     <!--TODO Se utiliza la extensión de BetterComments-->
+    <!--*Icono-->
+    <link class="shortcut" rel="shortcut icon" type="image" href="/img/logo-mini.PNG">
     <!--*Sweet Alert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--*CSS-->
@@ -22,6 +24,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!--*Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,30 +35,44 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html">
-                <img src="/img/logo-mini.PNG" alt="Logo" width="30" height="24"
-                    class="d-inline-block align-text-top" id="logo-mini">
-                El Galpón Muebles
+                <img src="/img/logo-mini.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"
+                    id="logo-mini">
+                El Galpon
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!--ms-auto para que quede del lado derecho los hijos-->
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./users.html">Empleados</a>
-                        </li>
-                    </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!--ms-auto para que quede del lado derecho los hijos-->
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./users.html">Empleados</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
     <!--Banner-->
     <!--Cards-->
     <!--Footer-->
+    <footer id="footer">
+        <div class="footer-content">
+            <h3>El Galpon</h3>
+            <p>Conoce más de El Galpon. Estamos aquí para escucharte y brindarte la mejor atención posible. No dudes en contactarnos en cualquiera de nuestras redes sociales. Trabajamos para ofrecerte el mejor servicio.</p>
+                <ul class="socials">
+                    <li><a href="https://www.facebook.com/profile.php?id=100011565902503&locale=es_LA"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/elgalpon.muebles/"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+                </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>copyright &copy;2024 code designed by <span>Facundo Beldi</span></p>
+        </div>
+    </footer>
 </body>
 
 </html>
