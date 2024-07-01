@@ -39,7 +39,8 @@
     text-align: center;
     position: relative;
     color: var(--color-fuentes);
-    overflow: hidden; /* Evita que el botón se desborde en dispositivos pequeños */
+    overflow: hidden;
+    /* Evita que el botón se desborde en dispositivos pequeños */
 }
 
 .capsula_foto {
@@ -52,24 +53,34 @@
 }
 
 .capsula_foto::before {
-    content: ""; /* Necesario para que funcione el pseudo-elemento */
-    position: absolute; /* Posición absoluta en relación al contenedor */
+    content: "";
+    /* Necesario para que funcione el pseudo-elemento */
+    position: absolute;
+    /* Posición absoluta en relación al contenedor */
     top: 0;
     left: 0;
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    height: 100%; /* Ocupa toda la altura del contenedor */
-    background-image: url(/img/fondo.png); /* Imagen de fondo */
-    background-size: cover; /* Cubre todo el contenedor */
-    background-position: center; /* Centra la imagen */
-    opacity: 0.5; /* Opacidad del 50% */
-    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+    width: 100%;
+    /* Ocupa todo el ancho del contenedor */
+    height: 100%;
+    /* Ocupa toda la altura del contenedor */
+    background-image: url(/img/fondo.png);
+    /* Imagen de fondo */
+    background-size: cover;
+    /* Cubre todo el contenedor */
+    background-position: center;
+    /* Centra la imagen */
+    opacity: 0.5;
+    /* Opacidad del 50% */
+    z-index: -1;
+    /* Asegura que el fondo esté detrás del contenido */
 }
 
 .texto {
     text-align: center;
 }
 
-#primero, #segundo {
+#primero,
+#segundo {
     font-size: 2em;
     margin: 10px 0;
 }
@@ -86,7 +97,7 @@
     justify-content: center;
     z-index: 1;
     position: absolute;
-    bottom: 100px; 
+    bottom: 100px;
     width: 100%;
 }
 
@@ -108,8 +119,9 @@
     .banner {
         height: 500px;
     }
+
     .boton-flecha {
-        bottom: 20px; 
+        bottom: 20px;
     }
 }
 
@@ -117,10 +129,12 @@
     .banner {
         height: 300px;
     }
+
     .boton-flecha {
-        bottom: 10px; 
+        bottom: 10px;
     }
-    #primero{
+
+    #primero {
         display: none;
     }
 }
@@ -282,16 +296,16 @@ footer {
 .btn-naranja-fuerte {
     background-color: #6a040f !important;
     border-color: #6a040f !important;
-    color: #fff !important; 
+    color: #fff !important;
 }
 
 /*color  de fondo de users*/
-.users-body{
+.users-body {
     background-color: var(--color-suave);
 }
 
 /*formato de "El Galpon"*/
-.brand-name{
+.brand-name {
     font-family: "Alfa Slab One", serif;
     text-transform: uppercase;
     color: var(--color-rojo) !important;
@@ -355,9 +369,10 @@ footer {
 
 .carousel-img {
     max-height: 250px;
-    object-fit: cover; /* Para asegurar que la imagen se ajuste bien dentro del contenedor */
+    object-fit: cover;/* Para asegurar que la imagen se ajuste bien dentro del contenedor */
     padding: 20px;
-  }
-.banner-products{
+}
+
+.banner-products {
     background-color: var(--color-suave);
 }
