@@ -10,7 +10,7 @@
     --color-suave-oscuro: #d4c485;
 }
 
-/*TODO: Estilos de NavBar*/
+/*TODO: Estilos de NavBar Global*/
 
 /*Estilos de El Galpon navbar*/
 .navbar-brand {
@@ -167,18 +167,18 @@
 }
 
 .opiniones-fotos {
-    margin: 30px;
+    margin: 20px;
 }
 
 .opiniones-fotos img {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
     border: 7px solid var(--color-rojo);
 }
 
-/*TODO: Estilos del Footer*/
+/*TODO: Estilos del Footer Index y Productos*/
 
 footer {
     position: relative;
@@ -262,7 +262,7 @@ footer {
     font-weight: 200;
 }
 
-/*TODO: Estilos de Login*/
+/*TODO: Estilos de Login - Users */
 
 /*Login*/
 .login-container,
@@ -276,7 +276,26 @@ footer {
     /* Muestro el contenedor del crud de usuarios */
 }
 
-/*TODO: Estilos de Crud de usuarios*/
+/*TODO: Estilos de Crud de usuarios - Users*/
+
+/*Personalizar color  de los botones*/
+.btn-naranja-fuerte {
+    background-color: #6a040f !important;
+    border-color: #6a040f !important;
+    color: #fff !important; 
+}
+
+/*color  de fondo de users*/
+.users-body{
+    background-color: var(--color-suave);
+}
+
+/*formato de "El Galpon"*/
+.brand-name{
+    font-family: "Alfa Slab One", serif;
+    text-transform: uppercase;
+    color: var(--color-rojo) !important;
+}
 
 /*Crud de usuarios*/
 .contenedor {
@@ -285,7 +304,7 @@ footer {
     justify-content: space-between;
     flex-direction: row;
     gap: 3rem;
-    padding-top: 2rem;
+    color: var(--color-fuentes);
 }
 
 .contenedor h1 {
@@ -299,7 +318,6 @@ footer {
     margin: 5px;
     width: 30%;
     padding: 1rem;
-    border-radius: 5%;
 }
 
 .tabla {
@@ -319,7 +337,7 @@ footer {
 }
 
 .form-edit {
-    background-color: var(--color-intermedio);
+    background-color: var(--color-suave-oscuro);
 }
 
 @media screen and (max-width: 768px) {
@@ -331,4 +349,15 @@ footer {
     .formulario {
         width: 100%;
     }
+}
+
+/*TODO: Estilos del carrusel de Products*/
+
+.carousel-img {
+    max-height: 250px;
+    object-fit: cover; /* Para asegurar que la imagen se ajuste bien dentro del contenedor */
+    padding: 20px;
+  }
+.banner-products{
+    background-color: var(--color-suave);
 }

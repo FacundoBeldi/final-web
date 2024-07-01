@@ -52,7 +52,6 @@ function renderUsers(arrayUsers) {
                 <td class="user-mail"> ${user.email}</td>
                 <td class="user-city"> ${user.location}</td>
                 <td class="user-age"> ${user.bornDate}</td>
-                <td class="user-active">${user.active}</td>
                 <td class="cont-btn">
                     <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">
                         <i class="fa-solid fa-trash"></i>
@@ -133,11 +132,10 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
         email: element.email.value,
         location: element.location.value,
         bornDate: element.bornDate.value,
-        active: element.active.value,
         image: element.image.value
     }
 
-    if (isEditing) {
+    if (isEditing) { //Si estoy editando, PUT y cartel de editar
         axios.put(`${baseURL}/users/${userToEdit}`, newUser)
             .then(response => {
                 const index = users.findIndex(user => user.id === userToEdit);
@@ -158,7 +156,7 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
                 });
                 console.log(error);
             });
-    } else {
+    } else { //Si estoy agregando, POST y cartel de agregar
         axios.post(`${baseURL}/users`, newUser)
             .then(response => {
                 users.push(response.data);
@@ -196,28 +194,43 @@ function completeUser(idUser) {
         });
         return;
     }
+
     //?Reemplazar los valores del formulario con los del usuario a editar
     const element = userFormHTML.elements; //Selecciono los elementos del formulario
     element.fullname.value = user.fullname; //Reemplazo el valor
     element.email.value = user.email; //Reemplazo el valor
     element.location.value = user.location; //Reemplazo el valor
     element.bornDate.value = user.bornDate; //Reemplazo el valor
-    element.active.value = user.active //Reemplazo el valor
     element.image.value = user.image; //Reemplazo el valor
 
     //? Cambiar el texto del botón de submit
-
-    formContainerHTML.classList.add('form-edit'); //Muestro el formulario
+    formContainerHTML.classList.add('form-edit'); //Muestro el formulario con otra  estética
     btnSubmitHTML.classList.remove('btn-primary');
-    btnSubmitHTML.classList.add('btn-success');
-    btnSubmitHTML.innerText = 'Editar usuario';
+    btnSubmitHTML.classList.add('btn-naranja-fuerte');
+    btnSubmitHTML.innerText = 'Editar empleado';
 }
 
+//?Reseteo el formulario, lo limpio y cambio estéticas
 function resetForm() {
     userFormHTML.reset();
     isEditing = false;
     userToEdit = null;
-    btnSubmitHTML.classList.remove('btn-success');
+    btnSubmitHTML.classList.remove('btn-naranja-fuerte');
     btnSubmitHTML.classList.add('btn-primary');
+    formContainerHTML.classList.remove('form-edit');
     btnSubmitHTML.innerText = 'Agregar';
+}
+
+//? Busqueda de empleado
+function inputSearch(event){
+    event.preventDefault(); //Noserecarga la página
+    const search = event.target.value.toLocaleLowerCase(); //agarro el valor del input y lo paso a minúsculas
+    const filtro = users.filter((usr) =>{ //Filtro los usuarios
+        if(usr.fullname.toLocaleLowerCase().includes(search)){ //Si el nombre del usuario incluye la búsqueda
+            return 1; //verdadero
+        }else{
+            return 0;//falso
+        }
+    });
+    renderUsers(filtro);//Muestro los usuarios filtrados
 }
