@@ -63,7 +63,7 @@
     /* Ocupa todo el ancho del contenedor */
     height: 100%;
     /* Ocupa toda la altura del contenedor */
-    background-image: url(/img/fondo.png);
+    background-image: url(./img/fondo.png);
     /* Imagen de fondo */
     background-size: cover;
     /* Cubre todo el contenedor */
