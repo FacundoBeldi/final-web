@@ -160,6 +160,13 @@
     transition: 0.5s;
 }
 
+@media screen and (max-width: 768px) {
+    .info {
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        background-color: var(--color-suave);
+    }
+}
 /*TODO: Estilos de seccion Opiniones del Index*/
 
 .opiniones {
