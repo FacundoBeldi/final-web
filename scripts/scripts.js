@@ -15,15 +15,15 @@ function login(event) { //funcion del login, paso como parametro event para la f
 
 //TODO: Funciones del Crud
 
-const baseURL = 'https://66677fa2a2f8516ff7a7a5f0.mockapi.io' //URL de la API
+const baseURL = 'https://66677fa2a2f8516ff7a7a5f0.mockapi.io/productos' //URL de la API
 
-var users = []; //Array de usuarios de la API
+var products = []; //Array de usuarios de la API
 
 //? Obtener los usuarios de la API
-axios.get(`${baseURL}/users`)//Obtengo los usuarios de la API
+axios.get(`${baseURL}/products`)//Obtengo los usuarios de la API
     .then(response => {
-        renderUsers(response.data)
-        users = response.data; //Guardo los usuarios agarrados por la API en el array
+        renderProducts(response.data)
+        products = response.data; //Guardo los usuarios agarrados por la API en el array
     }) //Si la respuesta es correcta, muestro los usuarios en la tabla
     .catch(error => {
         Swal.fire({
@@ -40,23 +40,23 @@ axios.get(`${baseURL}/users`)//Obtengo los usuarios de la API
 const tableHTML = document.getElementById('table-container'); //Selecciono el contenedor de la tabla
 const tableBodyHTML = document.getElementById('table-body'); //Selecciono el cuerpo de la tabla
 
-function renderUsers(arrayUsers) {
+function renderProducts(arrayProducts) {
     tableBodyHTML.innerHTML = ''; //Limpio la tabla
-    arrayUsers.forEach(user => { //Recorro el array de usuarios, por cada usuario agrego una fila a la tabla
+    arrayProducts.forEach(products => { //Recorro el array de usuarios, por cada usuario agrego una fila a la tabla
         tableBodyHTML.innerHTML += `
             <tr>
-                 <td class="user-image">
-                    <img src="${user.image}" alt ="${user.fullname} avatar">
+                 <td class="product-image">
+                    <img src="${products.image}" alt ="${products.name}">
                  </td>
-                <td class="user-name"> ${user.fullname}</td>
-                <td class="user-mail"> ${user.email}</td>
-                <td class="user-city"> ${user.location}</td>
-                <td class="user-age"> ${user.bornDate}</td>
+                <td class="product-name"> ${products.name}</td>
+                <td class="product-category"> ${products.category}</td>
+                <td class="product-price"> ${products.price}</td>
+                <td class="product-points"> ${products.points}</td>
                 <td class="cont-btn">
-                    <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">
+                    <button class="btn btn-danger btn-sm" onclick="deleteProduct('${products.id}')">
                         <i class="fa-solid fa-trash"></i>
                     </button>
-                    <button class="btn btn-primary btn-sm" data-edit="${user.id}">
+                    <button class="btn btn-primary btn-sm" data-edit="${products.id}">
                         <i class="fa-solid fa-pencil"></i>
                     </button>
                 </td>
@@ -67,34 +67,34 @@ function renderUsers(arrayUsers) {
 
 //? Eliminar un usuario
 
-function deleteUser(idUser) {
+function deleteProduct(idProduct) {
 
-    const indice = users.findIndex((user) => user.id == idUser);
+    const indice = products.findIndex((product) => product.id == idProduct);
 
     if (indice === -1) {//Si no lo encuentra, muestro un error
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'No se encontró el usuario a eliminar'
+            text: 'No se encontró el producto a eliminar'
         })
         return;
     }
 
-    users.splice(indice, 1);//Elimino el usuario del array
-    renderUsers(users);//Vuelvo a mostrar la tabla
-    axios.delete(`${baseURL}/users/${idUser}`)
+    products.splice(indice, 1);//Elimino el usuario del array
+    renderProducts(products);//Vuelvo a mostrar la tabla
+    axios.delete(`${baseURL}/products/${idProduct}`)
         .then(() => {
             Swal.fire({
                 icon: 'success',
                 title: 'Usuario eliminado',
-                text: 'El usuario ha sido eliminado correctamente'
+                text: 'El producto ha sido eliminado correctamente'
             });
         })
         .catch(error => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Algo salió mal al eliminar el usuario'
+                text: 'Algo salió mal al eliminar el producto'
             });
             console.log(error);
         });
@@ -103,12 +103,12 @@ function deleteUser(idUser) {
 //? Editar un usuario
 
 function updateEditButtons() {
-    userButtonsEdit = document.querySelectorAll('button[data-edit]'); //Selecciono todos los botones con el atributo data-edit
-    userButtonsEdit.forEach(button => { //Por cada botón, le agrego un evento click
+    productButtonsEdit = document.querySelectorAll('button[data-edit]'); //Selecciono todos los botones con el atributo data-edit
+    productButtonsEdit.forEach(button => { //Por cada botón, le agrego un evento click
         button.addEventListener('click', function (event) {
             event.preventDefault(); //Que no se recargue la página
             const id = event.currentTarget.dataset.edit; //Obtengo el id del usuario que fue clickeado
-            completeUser(id); //Voy a la función de completar usuario con el id clickeado
+            completeProduct(id); //Voy a la función de completar usuario con el id clickeado
         });
     });
 }
@@ -126,53 +126,53 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
     event.preventDefault(); //Evito que se recargue la página
     const element = event.target.elements; //Selecciono los elementos del formulario
 
-    const newUser = { //Creo un objeto con los valores del formulario
+    const newProduct = { //Creo un objeto con los valores del formulario
         //el id lo asigna la API
-        fullname: element.fullname.value,
-        email: element.email.value,
-        location: element.location.value,
-        bornDate: element.bornDate.value,
-        image: element.image.value
+        name: element.name.value,
+        image: element.image.value,
+        category: element.category.value,
+        price: element.price.value,
+        points: element.points.value
     }
 
     if (isEditing) { //Si estoy editando, PUT y cartel de editar
-        axios.put(`${baseURL}/users/${userToEdit}`, newUser)
+        axios.put(`${baseURL}/products/${productToEdit}`, newProduct)
             .then(response => {
-                const index = users.findIndex(user => user.id === userToEdit);
-                users[index] = response.data;
-                renderUsers(users);
+                const index = products.findIndex(product => product.id === productToEdit);
+                products[index] = response.data;
+                renderProducts(products);
                 resetForm();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Usuario editado',
-                    text: 'El usuario ha sido editado correctamente'
+                    title: 'Producto editado',
+                    text: 'El producto ha sido editado correctamente'
                 });
             })
             .catch(error => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Algo salió mal al editar el usuario'
+                    text: 'Algo salió mal al editar el producto'
                 });
                 console.log(error);
             });
     } else { //Si estoy agregando, POST y cartel de agregar
-        axios.post(`${baseURL}/users`, newUser)
+        axios.post(`${baseURL}/products`, newProduct)
             .then(response => {
-                users.push(response.data);
-                renderUsers(users);
+                products.push(response.data);
+                renderProducts(products);
                 resetForm();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Usuario agregado',
-                    text: 'El usuario ha sido agregado correctamente'
+                    title: 'Producto agregado',
+                    text: 'El producto ha sido agregado correctamente'
                 });
             })
             .catch(error => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Algo salió mal al agregar el usuario'
+                    text: 'Algo salió mal al agregar el producto'
                 });
                 console.log(error);
             });
@@ -181,27 +181,27 @@ userFormHTML.addEventListener('submit', (event) => { //Agrego un evento submit a
 
 //? Completar el formulario con los datos del usuario a editar
 
-function completeUser(idUser) {
+function completeProduct(idProduct) {
     isEditing = true; //Estoy editando un usuario
-    userToEdit = idUser;
-    const user = users.find((usr) => usr.id === idUser); //Busco el usuario a editar
+    productToEdit = idProduct;
+    const product = products.find((prod) => prod.id === idProduct); //Busco el usuario a editar
 
-    if (!user) {
+    if (!product) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'No se encontró el usuario a editar'
+            text: 'No se encontró el producto a editar'
         });
         return;
     }
 
     //?Reemplazar los valores del formulario con los del usuario a editar
     const element = userFormHTML.elements; //Selecciono los elementos del formulario
-    element.fullname.value = user.fullname; //Reemplazo el valor
-    element.email.value = user.email; //Reemplazo el valor
-    element.location.value = user.location; //Reemplazo el valor
-    element.bornDate.value = user.bornDate; //Reemplazo el valor
-    element.image.value = user.image; //Reemplazo el valor
+    element.name.value = product.name; //Reemplazo el valor
+    element.image.value = product.image; //Reemplazo el valor
+    element.category.value = product.category; //Reemplazo el valor
+    element.price.value = product.price; //Reemplazo el valor
+    element.points.value = product.points; //Reemplazo el valor
 
     //? Cambiar el texto del botón de submit
     formContainerHTML.classList.add('form-edit'); //Muestro el formulario con otra  estética
@@ -214,7 +214,7 @@ function completeUser(idUser) {
 function resetForm() {
     userFormHTML.reset();
     isEditing = false;
-    userToEdit = null;
+    productToEdit = null;
     btnSubmitHTML.classList.remove('btn-naranja-fuerte');
     btnSubmitHTML.classList.add('btn-primary');
     formContainerHTML.classList.remove('form-edit');
@@ -225,12 +225,12 @@ function resetForm() {
 function inputSearch(event){
     event.preventDefault(); //Noserecarga la página
     const search = event.target.value.toLocaleLowerCase(); //agarro el valor del input y lo paso a minúsculas
-    const filtro = users.filter((usr) =>{ //Filtro los usuarios
-        if(usr.fullname.toLocaleLowerCase().includes(search)){ //Si el nombre del usuario incluye la búsqueda
+    const filtro = products.filter((prod) =>{ //Filtro los usuarios
+        if(prod.name.toLocaleLowerCase().includes(search)){ //Si el nombre del usuario incluye la búsqueda
             return 1; //verdadero
         }else{
             return 0;//falso
         }
     });
-    renderUsers(filtro);//Muestro los usuarios filtrados
+    renderProducts(filtro);//Muestro los usuarios filtrados
 }

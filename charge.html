@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Galpón Muebles | Usuarios</title>
+    <title>El Galpón Muebles | Carga</title>
     <!--TODO Se utiliza la extensión de BetterComments-->
     <!--*Icono-->
     <link class="shortcut" rel="shortcut icon" type="image" href="./img/logo-mini.PNG">
@@ -59,39 +59,36 @@
     <div class="crud-container" id="crud-container"> <!--no tien el show, por ende va a tener el display: none-->
         <div class="contenedor">
             <div class="formulario">
-                <h1>Empleados de <span class="brand-name">El Galpon</span></h1>
+                <h1>Productos de <span class="brand-name">El Galpon</span></h1>
                 <form class="user-form" id="user-form">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nombre Completo</label>
-                        <input type="text" name="fullname" class="form-control" id="exampleFormControlInput1"
-                            placeholder="Juan Gonzalez" required>
+                        <label for="name" class="form-label">Nombre del Producto</label>
+                        <input type="text" name="name" class="form-control" id="name"
+                            placeholder="Escritorio de Melamina" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="juan@ejemplo.com" required>
-                        <div id="emailHelp" class="form-text">Esta información no será compartida.</div>
+                        <label for="image" class="form-label">Imagen</label>
+                        <input type="url" name="image" class="form-control" id="image" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Fecha Nacimiento</label>
-                        <input type="date" name="bornDate" class="form-control" id="exampleFormControlInput2"
-                            placeholder="Juan Gonzalez" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Localidad</label>
-                        <select class="form-select" name="location" aria-label="Default select example" required>
-                            <option selected disabled>Seleccione Localidad</option>
-                            <option value="1">La Lucila</option>
-                            <option value="2">Garin</option>
-                            <option value="3">Maschwitz</option>
-                            <option value="4">Escobar</option>
-                            <option value="5">Pilar</option>
-                            <option value="6">San Martin</option>
+                        <label for="category" class="form-label">Categoría</label>
+                        <select class="form-select" name="category" aria-label="Default select example" required>
+                            <option selected disabled>Seleccione la Categoría</option>
+                            <option value="Camas">Camas</option>
+                            <option value="Muebles">Muebles</option>
+                            <option value="Sillas">Sillas</option>
+                            <option value="Mesas">Mesas</option>
+                            <option value="Acolchados/Almohadones">Acolchados/Almohadones</option>
+                            <option value="Otros">Otros</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Imagen de Perfil</label>
-                        <input type="url" name="image" class="form-control" id="exampleFormControlInput3" required>
+                        <label for="price" class="form-label">Precio</label>
+                        <input type="number" name="price" class="form-control" id="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="points" class="form-label">Puntaje</label>
+                        <input type="number" name="points" class="form-control" id="points" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
@@ -100,10 +97,10 @@
 
                 <!--User Search-->
 
-                <div class="user-search">
+                <div class="product-search">
                     <div class="mb-3">
-                        <label for="user-search" class="form-label">Buscar empleado</label>
-                        <input type="text" class="form-control" id="user-search" onkeyup="inputSearch(event)">
+                        <label for="product-search" class="form-label">Buscar producto</label>
+                        <input type="text" class="form-control" id="product-search" onkeyup="inputSearch(event)">
                     </div>
                 </div>
 
@@ -124,11 +121,11 @@
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Imagen de Perfil</th>
-                                <th scope="col">Nombre Completo</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Localidad</th>
-                                <th scope="col">Edad</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Puntaje</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
