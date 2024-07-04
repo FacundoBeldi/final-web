@@ -346,7 +346,7 @@ footer {
     width: 70%;
 }
 
-.user-image img {
+.product-image img {
     width: 60px;
     height: 60px;
     object-fit: cover;
@@ -383,3 +383,109 @@ footer {
 .banner-products {
     background-color: var(--color-suave);
 }
+
+/*TODO: Estilos de cards de Products*/
+
+.section-cards{
+    background-color: var(--color-suave);
+}
+
+/*?Esta card la saqué de https://uiverse.io/gharsh11032000/selfish-owl-57 modifiqué algunos estilos*/
+
+.card-container {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background-color: var(--color-suave-oscuro);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+    box-shadow: 0 0 0 5px var(--color-naranja-fuerte);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .card-container svg {
+    width: 48px;
+    fill: #333;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card-container:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  }
+  
+  .card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card-container:hover .card__content {
+    transform: rotateX(0deg);
+  }
+  
+  .card__title {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  .card-container:hover svg {
+    scale: 0;
+  }
+  
+  .card__info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card__price {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .card__points {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .card__description {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.4;
+  }
+  
+  .carda-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card__contact {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #25d366; /*color  de wpp*/
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

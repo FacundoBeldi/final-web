@@ -60,7 +60,7 @@
         <div class="contenedor">
             <div class="formulario">
                 <h1>Productos de <span class="brand-name">El Galpon</span></h1>
-                <form class="user-form" id="user-form">
+                <form class="product-form" id="product-form">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre del Producto</label>
                         <input type="text" name="name" class="form-control" id="name"
@@ -81,6 +81,10 @@
                             <option value="Acolchados/Almohadones">Acolchados/Almohadones</option>
                             <option value="Otros">Otros</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripcion</label>
+                        <input type="text" name="description" class="form-control" id="description" required>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Precio</label>
@@ -124,6 +128,7 @@
                                 <th scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Categoría</th>
+                                <th scope="col">Descripcion</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Puntaje</th>
                                 <th scope="col">Acciones</th>
