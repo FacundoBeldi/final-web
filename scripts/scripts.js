@@ -210,7 +210,7 @@ function completeProduct(idProduct) {
     formContainerHTML.classList.add('form-edit'); //Muestro el formulario con otra  estética
     btnSubmitHTML.classList.remove('btn-primary'); //Cambio el color del botón, quito
     btnSubmitHTML.classList.add('btn-naranja-fuerte'); //Cambio el color del botón, agrego
-    btnSubmitHTML.innerText = 'Editar empleado';//Cambio texto del boton
+    btnSubmitHTML.innerText = 'Editar producto';//Cambio texto del boton
 }
 
 //?Reseteo el formulario, lo limpio y cambio estéticas
