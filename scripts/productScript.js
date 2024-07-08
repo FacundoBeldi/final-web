@@ -23,7 +23,9 @@ axios.get(baseURL)//Obtengo los productos de la API
 cardBodyHTML = document.getElementById('carda-wrap');
 
 function renderProds(arrayProducts) {
+  cardBodyHTML.innerHTML = ''; // Limpiar el contenedor antes de renderizar los productos
   arrayProducts.forEach(product => {
+    const stars = getStars(product.points); // Obtener las estrellas según el puntaje
       cardBodyHTML.innerHTML += `
       <div class="card-container">
         <div class="card__image-container">
@@ -33,7 +35,7 @@ function renderProds(arrayProducts) {
           <p class="card__title">${product.name}</p>
           <div class="card__info">
             <p class="card__price">$${product.price}</p>
-            <p class="card__points">Puntaje: ${product.points}</p>
+            <div class="card__stars">${stars}</div>
           </div>
           <p class="card__description">${product.description}</p>
           <a href="https://wa.me/541164674381" class="card__contact">
@@ -43,6 +45,7 @@ function renderProds(arrayProducts) {
       </div>`;
   });
 }
+
 
 document.getElementById('search').classList.add('btn-naranja-fuerte');
 
@@ -57,4 +60,17 @@ function inputSearch(event){
       }
   });
   renderProds(filtro);//Muestro los productos filtrados
+}
+
+function getStars(points) {
+  const totalStars = 5;
+  let starsHTML = '';
+  for (let i = 1; i <= totalStars; i++) {
+    if (i <= points) {
+      starsHTML += '<i class="fas fa-star filled"></i>';
+    } else {
+      starsHTML += '<i class="fas fa-star"></i>';
+    }
+  }
+  return starsHTML;
 }
