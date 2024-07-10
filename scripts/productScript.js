@@ -62,14 +62,15 @@ function inputSearch(event){
   renderProds(filtro);//Muestro los productos filtrados
 }
 
+// Función para obtener las estrellas según el puntaje
 function getStars(points) {
   const totalStars = 5;
-  let starsHTML = '';
-  for (let i = 1; i <= totalStars; i++) {
-    if (i <= points) {
-      starsHTML += '<i class="fas fa-star filled"></i>';
+  let starsHTML = ''; // Variable para guardar el HTML de las estrellas
+  for (let i = 1; i <= totalStars; i++) { // Recorrer las 5 estrellas 
+    if (i <= points) { 
+      starsHTML += '<i class="fas fa-star filled"></i>'; // Agregar estrella llena
     } else {
-      starsHTML += '<i class="fas fa-star"></i>';
+      starsHTML += '<i class="fas fa-star"></i>'; // Agregar estrella vacía
     }
   }
   return starsHTML;

@@ -126,13 +126,33 @@ productFormHTML.addEventListener('submit', (event) => { //Agrego un evento submi
 
     event.preventDefault(); //Evito que se recargue la página
     const element = event.target.elements; //Selecciono los elementos del formulario
+    const name = element.name.value.trim();
+    const description = element.description.value.trim();
+
+    if (name.length > 35) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'El nombre del producto no puede tener más de 35 caracteres'
+        });
+        return;
+    }
+
+    if (description.length > 250) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'La descripción del producto no puede tener más de 250 caracteres'
+        });
+        return;
+    }
 
     const newProduct = { //Creo un objeto con los valores del formulario
         //el id lo asigna la API
-        name: element.name.value,
+        name: name,
         image: element.image.value,
         category: element.category.value,
-        description: element.description.value,
+        description: description,
         price: element.price.value,
         points: element.points.value
     }

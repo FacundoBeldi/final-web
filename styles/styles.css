@@ -166,6 +166,7 @@
         background-color: var(--color-suave);
     }
 }
+
 /*TODO: Estilos de seccion Opiniones del Index*/
 
 .opiniones {
@@ -294,6 +295,7 @@ footer {
 .show {
     display: block !important;
     /* Muestro el contenedor del crud de usuarios */
+    margin-top: 4rem !important;
 }
 
 /*TODO: Estilos de Crud de usuarios - Users*/
@@ -379,6 +381,10 @@ footer {
 
 /*TODO: Estilos del carrusel de Products*/
 
+.carousel{
+    padding-top: 4rem;
+}
+
 .carousel-img {
     max-height: 250px;
     object-fit: cover;/* Para asegurar que la imagen se ajuste bien dentro del contenedor */
@@ -387,7 +393,6 @@ footer {
 
 .banner-products {
     background-color: var(--color-suave);
-    margin-top: 4rem;
 }
 
 /*TODO: Estilos de cards de Products*/
@@ -457,9 +462,9 @@ footer {
   
   .card__title {
     margin: 0;
-    font-size: 24px;
-    color: #333;
-    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-fuentes);
+    font-weight: 500;
   }
   
   .card-container:hover svg {
@@ -469,18 +474,16 @@ footer {
   .card__info {
     display: flex;
     justify-content: space-between;
+    margin-top: 1rem;
   }
   
   .card__price {
-    font-size: 18px;
-    color: #333;
+    font-size: 24px;
+    color: var(--color-naranja-fuerte);
+    font-weight: 700;
+    letter-spacing: 0.02rem;
   }
-  
-  .card__points {
-    font-size: 18px;
-    color: #333;
-  }
-  
+    
   .card__description {
     margin: 10px 0 0;
     font-size: 14px;
@@ -507,8 +510,12 @@ footer {
     align-items: center;
     justify-content: center;
   }
+
+  /*Estilos de las estrellas*/
+
   .card__stars {
     display: flex;
+    margin-top: 10px;
   }
   
   .card__stars .fa-star {
