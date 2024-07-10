@@ -126,8 +126,8 @@ productFormHTML.addEventListener('submit', (event) => { //Agrego un evento submi
 
     event.preventDefault(); //Evito que se recargue la página
     const element = event.target.elements; //Selecciono los elementos del formulario
-    const name = element.name.value.trim();
-    const description = element.description.value.trim();
+    const name = element.name.value.trim(); //Obtengo el valor del input name y le quito los espacios al principio y al final
+    const description = element.description.value.trim(); //Obtengo el valor del input description y le quito los espacios al principio y al final
 
     if (name.length > 35) {
         Swal.fire({
