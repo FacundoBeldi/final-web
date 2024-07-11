@@ -40,8 +40,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body class="users-body">
+<body class="products-body">
+
       <!--Navbar-->
+
       <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html">
@@ -66,7 +68,9 @@
             </div>
         </div>
     </nav>
+
     <!-- Formulario de Login -->
+
     <div class="container mt-5">
         <div class="login-container shows" id="login-container">
             <!--tiene el "show", es decir que se va a mostrar de arranque-->
@@ -86,7 +90,9 @@
                 incorrectos</div> <!--Se utiliza la propiedad de alert de bootstrap para el error-->
         </div>
     </div>
-    <!--Crud de usuarios-->
+
+    <!--Crud de productos-->
+
     <div class="crud-container" id="crud-container"> <!--no tien el show, por ende va a tener el display: none-->
         <div class="contenedor">
             <div class="formulario">
@@ -130,7 +136,7 @@
             </div>
             <div class="tabla">
 
-                <!--User Search-->
+                <!--Product Search-->
 
                 <div class="product-search">
                     <div class="mb-3">
@@ -150,7 +156,7 @@
                     </button>
                 </div>
 
-                <!--Tabla Usuarios-->
+                <!--Tabla de productos-->
 
                 <div class="table-container" id="table-container">
                     <table class="table table-dark table-striped">
@@ -166,7 +172,7 @@
                             </tr>
                         </thead>
                         <tbody id="table-body">
-                            <!--Aca se van a cargar los usuarios-->
+                            <!--Aca se van a cargar los productos-->
                         </tbody>
                     </table>
                 </div>

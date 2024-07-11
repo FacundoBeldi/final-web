@@ -283,7 +283,7 @@ footer {
     font-weight: 200;
 }
 
-/*TODO: Estilos de Login - Users */
+/*TODO: Estilos de Login - Productos */
 
 /*Login*/
 .login-container,
@@ -298,7 +298,7 @@ footer {
     margin-top: 4rem !important;
 }
 
-/*TODO: Estilos de Crud de usuarios - Users*/
+/*TODO: Estilos de Crud de Productos - Productos*/
 
 /*Personalizar color  de los botones*/
 .btn-naranja-fuerte {
@@ -313,8 +313,8 @@ footer {
     color: #fff !important;
 }
 
-/*color  de fondo de users*/
-.users-body {
+/*color  de fondo de Productos*/
+.products-body {
     background-color: var(--color-suave);
 }
 
