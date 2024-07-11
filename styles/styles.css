@@ -292,7 +292,7 @@ footer {
     /* Oculto el contenedor del crud de usuarios y del login*/
 }
 
-.show {
+.shows {
     display: block !important;
     /* Muestro el contenedor del crud de usuarios */
     margin-top: 4rem !important;

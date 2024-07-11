@@ -6,8 +6,8 @@ function login(event) { //funcion del login, paso como parametro event para la f
     const password = document.getElementById('password').value; // Obtiene el valor del input con id password
 
     if (username === 'admin' && password === 'admin') { // Si el usuario y contraseña son iguales a admin (admin lo puse yo a modo de ejemplo)
-        document.getElementById('login-container').classList.remove('show'); //Hago que no se vea el login-container
-        document.getElementById('crud-container').classList.add('show'); //Hago que se vea el crud de usuarios
+        document.getElementById('login-container').classList.remove('shows'); //Hago que no se vea el login-container
+        document.getElementById('crud-container').classList.add('shows'); //Hago que se vea el crud de usuarios
     } else {
         document.getElementById('alert').style.display = 'block'; // Si el usuario y contraseña no son iguales a admin, muestro el alert de error
     }
