@@ -126,10 +126,25 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search"
                         onkeyup="inputSearch(event)">
-                    <button id="search" class="btn btn-outline-success" type="submit">Limpiar</button>
+                    <button id="filter-button" class="btn btn-outline-success" type="button">Filtros</button>
                 </form>
             </div>
         </section>
+
+        <!--Filter-->
+
+        <div id="filter-options" style="display:none;">
+            <label for="filter-type">Ordenar por:</label>
+            <select id="filter-type">
+                <option value="price-asc">Precio: Más bajo a más alto</option>
+                <option value="price-desc">Precio: Más alto a más bajo</option>
+                <option value="points-asc">Puntaje: Más bajo a más alto</option>
+                <option value="points-desc">Puntaje: Más alto a más bajo</option>
+                <option value="name-asc">Alfabéticamente: A-Z</option>
+                <option value="name-desc">Alfabéticamente: Z-A</option>
+            </select>
+            <button id="apply-filter" class="btn btn-outline-success btn-sm">Aplicar</button>
+        </div>
 
         <!--Cards-->
 
@@ -137,6 +152,13 @@
             <div class="carda-wrapper" id="carda-wrap">
             </div>
         </section>
+
+        <!--Sticky Button-->
+
+        <section class="sticky-button">
+            <a href="https://www.instagram.com/elgalpon.muebles/"><i class="fa-brands fa-instagram"></i></a>
+        </section>
+        
     </main>
 
     <!--Footer-->

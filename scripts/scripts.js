@@ -19,7 +19,19 @@ const baseURL = 'https://66677fa2a2f8516ff7a7a5f0.mockapi.io/productos' //URL de
 
 var products = []; //Array de productos de la API
 
+//? Formateo de fechas
+
+function formateaFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const dia = fecha.getDate().toString().padStart(2, "0");
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+    const año = fecha.getFullYear();
+    const fechaFormato = `${dia}-${mes}-${año}`;
+    return fechaFormato;
+}
+
 //? Obtener los productos de la API
+
 axios.get(`${baseURL}/products`)//Obtengo los productos de la API
     .then(response => {
         renderProducts(response.data)
@@ -49,6 +61,7 @@ function renderProducts(arrayProducts) {
                     <img src="${products.image}" alt ="${products.name}">
                  </td>
                 <td class="product-name"> ${products.name}</td>
+                <td>${formateaFecha(products.created_at)}</td>
                 <td class="product-category"> ${products.category}</td>
                 <td class="product-description"> ${products.description}</td>
                 <td class="product-price"> ${products.price}</td>
@@ -69,36 +82,54 @@ function renderProducts(arrayProducts) {
 //? Eliminar un producto
 
 function deleteProduct(idProduct) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Se eliminará el producto seleccionado",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const indice = products.findIndex((product) => product.id == idProduct);
 
-    const indice = products.findIndex((product) => product.id == idProduct);
+            if (indice === -1) {//Si no lo encuentra, muestro un error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se encontró el producto a eliminar'
+                });
+                return;
+            }
 
-    if (indice === -1) {//Si no lo encuentra, muestro un error
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No se encontró el producto a eliminar'
-        })
-        return;
-    }
-
-    products.splice(indice, 1);//Elimino el producto del array
-    renderProducts(products);//Vuelvo a mostrar la tabla
-    axios.delete(`${baseURL}/products/${idProduct}`)
-        .then(() => {
+            products.splice(indice, 1);//Elimino el producto del array
+            renderProducts(products);//Vuelvo a mostrar la tabla
+            axios.delete(`${baseURL}/products/${idProduct}`)
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Producto eliminado',
+                        text: 'El producto ha sido eliminado correctamente'
+                    });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal al eliminar el producto'
+                    });
+                    console.log(error);
+                });
+        } else {
             Swal.fire({
-                icon: 'success',
-                title: 'Producto eliminado',
-                text: 'El producto ha sido eliminado correctamente'
+                icon: 'info',
+                title: 'Cancelado',
+                text: 'La eliminación del producto ha sido cancelada'
             });
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Algo salió mal al eliminar el producto'
-            });
-            console.log(error);
-        });
+        }
+    });
 }
 
 //? Editar un producto
@@ -114,7 +145,7 @@ function updateEditButtons() {
     });
 }
 
-//? Agregar un producto cuando toco submit
+//? Mécanica de Submit (Agregar/Editar)
 
 let isEditing = false; //Variable para saber si estoy editando o agregando un producto
 let productToEdit = null; //Variable para saber qué producto estoy editando
@@ -154,7 +185,8 @@ productFormHTML.addEventListener('submit', (event) => { //Agrego un evento submi
         category: element.category.value,
         description: description,
         price: element.price.value,
-        points: element.points.value
+        points: element.points.value,
+        created_at: Date.now()
     }
 
     if (isEditing) { //Si estoy editando, PUT y cartel de editar
@@ -205,7 +237,7 @@ productFormHTML.addEventListener('submit', (event) => { //Agrego un evento submi
 
 function completeProduct(idProduct) {
     isEditing = true; //Estoy editando un producto
-    productToEdit = idProduct;
+    productToEdit = idProduct;//Guardo el id del producto a editar
     const product = products.find((prod) => prod.id === idProduct); //Busco el producto a editar
 
     if (!product) {
@@ -218,6 +250,7 @@ function completeProduct(idProduct) {
     }
 
     //?Reemplazar los valores del formulario con los del producto a editar
+
     const element = productFormHTML.elements; //Selecciono los elementos del formulario
     element.name.value = product.name; //Reemplazo el valor
     element.image.value = product.image; //Reemplazo el valor
@@ -227,6 +260,7 @@ function completeProduct(idProduct) {
     element.points.value = product.points; //Reemplazo el valor
 
     //? Cambiar el texto del botón de submit
+
     formContainerHTML.classList.add('form-edit'); //Muestro el formulario con otra  estética
     btnSubmitHTML.classList.remove('btn-primary'); //Cambio el color del botón, quito
     btnSubmitHTML.classList.add('btn-naranja-fuerte'); //Cambio el color del botón, agrego
@@ -234,6 +268,7 @@ function completeProduct(idProduct) {
 }
 
 //?Reseteo el formulario, lo limpio y cambio estéticas
+
 function resetForm() {
     productFormHTML.reset(); //Limpio el formulario
     isEditing = false;
@@ -245,15 +280,64 @@ function resetForm() {
 }
 
 //? Busqueda de producto
-function inputSearch(event){
+
+function inputSearch(event) {
     event.preventDefault(); //No se recarga la página
     const search = event.target.value.toLocaleLowerCase(); //agarro el valor del input y lo paso a minúsculas
-    const filtro = products.filter((prod) =>{ //Filtro los productos
-        if(prod.name.toLocaleLowerCase().includes(search)){ //Si el nombre del producto incluye la búsqueda
+    const filtro = products.filter((prod) => { //Filtro los productos
+        if (prod.name.toLocaleLowerCase().includes(search)) { //Si el nombre del producto incluye la búsqueda
             return 1; //verdadero
-        }else{
+        } else {
             return 0;//falso
         }
     });
     renderProducts(filtro);//Muestro los productos filtrados
+}
+
+//? Ordenar productos
+
+const filterButton = document.getElementById('filter-button2');
+document.getElementById('filter-button2').classList.add('btn-naranja-fuerte'); //Estetica
+
+filterButton.addEventListener('click', function () { //Evento para mostrar el filtro
+  const filterOptions = document.getElementById('filter-options');
+  filterOptions.style.display = filterOptions.style.display === 'none' ? 'flex' : 'none'; //Mostrar o no el filtro. Si está oculto ('none'), lo cambia a flex para mostrarlo, y si está visible ('flex'), lo cambia a none para ocultarlo
+});
+
+// Evento para aplicar el filtro seleccionado
+
+const applyFilterButton = document.getElementById('apply-filter');
+document.getElementById('apply-filter').classList.add('btn-naranja-fuerte'); //Estetica
+applyFilterButton.addEventListener('click', function () {
+  const filterType = document.getElementById('filter-type').value;
+  applyFilter(filterType); // Aplicar el filtro seleccionado
+});
+
+// Función para aplicar el filtro
+
+function applyFilter(filterType) {
+  
+  const collator = new Intl.Collator(undefined, { sensitivity: 'base' }); //Realizar operaciones de comparación sensibles
+
+  switch (filterType) {
+    case 'price-asc':
+      products.sort((a, b) => a.price - b.price);
+      break;
+    case 'price-desc':
+      products.sort((a, b) => b.price - a.price);
+      break;
+    case 'points-asc':
+      products.sort((a, b) => a.points - b.points);
+      break;
+    case 'points-desc':
+      products.sort((a, b) => b.points - a.points);
+      break;
+    case 'name-asc':
+      products.sort((a, b) => collator.compare(a.name, b.name));
+      break;
+    case 'name-desc':
+      products.sort((a, b) => collator.compare(b.name, a.name));
+      break;
+  }
+  renderProducts(products); // Renderizar los productos ordenados según el filtro seleccionado
 }

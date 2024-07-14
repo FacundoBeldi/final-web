@@ -129,7 +129,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="points" class="form-label">Puntaje</label>
-                        <input type="number" name="points" class="form-control" id="points" required>
+                        <input type="number" min="0" max="5" name="points" class="form-control" id="points" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
@@ -147,13 +147,18 @@
 
                 <!--Ordenamiento-->
 
-                <div class="px-2 mb-3">
-                    <button onclick="sortDesc()" class="btn btn-sm btn-primary" title="Ordenar de forma descendente">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </button>
-                    <button onclick="sortAsc()" class="btn btn-sm btn-primary" title="Ordenar de forma ascendente">
-                        <i class="fa-solid fa-arrow-up"></i>
-                    </button>
+                <button id="filter-button2" class="btn btn-outline-success" type="button">Filtros</button>
+                <div id="filter-options" style="display:none;">
+                    <label for="filter-type">Ordenar por:</label>
+                    <select id="filter-type">
+                        <option value="price-asc">Precio: Más bajo a más alto</option>
+                        <option value="price-desc">Precio: Más alto a más bajo</option>
+                        <option value="points-asc">Puntaje: Más bajo a más alto</option>
+                        <option value="points-desc">Puntaje: Más alto a más bajo</option>
+                        <option value="name-asc">Alfabéticamente: A-Z</option>
+                        <option value="name-desc">Alfabéticamente: Z-A</option>
+                    </select>
+                    <button id="apply-filter" class="btn btn-outline-success btn-sm">Aplicar</button>
                 </div>
 
                 <!--Tabla de productos-->
@@ -164,6 +169,7 @@
                             <tr>
                                 <th scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Fecha</th>
                                 <th scope="col">Categoría</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Precio</th>
